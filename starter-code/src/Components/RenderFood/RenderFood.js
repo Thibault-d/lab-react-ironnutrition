@@ -6,13 +6,12 @@ class RenderFood extends Component {
     calories:""
   };
 
-  handleClick = (e) => {
+  handleClick = (name, calories) => {
     const {handleToUpdate} = this.props;
-    handleToUpdate(this.state)
     this.setState({
-      name:  e.target.name,
-      calories:  e.target.calories,
-    });
+      name,
+      calories
+    }, () => handleToUpdate(this.state));
   };
 
   render() {
@@ -44,9 +43,7 @@ class RenderFood extends Component {
                     <div className="control">
                       <button
                         className="button is-info"
-                        name={item.name}
-                        calories={item.calories}
-                        onClick={this.handleClick}
+                        onClick={() => this.handleClick(item.name, item.calories)}
                       >
                         +
                       </button>
